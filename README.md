@@ -3,6 +3,7 @@
 
 #配置环境
 #configure the environment
+
 在cmd/终端里切到文件下载到的目录，输入
 
 pip install -U -r requirements.txt
