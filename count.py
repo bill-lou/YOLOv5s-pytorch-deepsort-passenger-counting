@@ -28,7 +28,7 @@ palette = (2**11 - 1, 2**15 - 1, 2**20 - 1)
 mask_image_temp = np.zeros((1080, 1920), dtype=np.uint8)
 
 # blue polygon line
-list_pts_blue = [[0, 945], [1920, 675], [1920, 605], [0, 881]]
+list_pts_blue = [[0, 994], [1920, 760], [1920, 714], [0, 951]]
 ndarray_pts_blue = np.array(list_pts_blue, np.int32)
 polygon_blue_value_1 = cv2.fillPoly(mask_image_temp, [ndarray_pts_blue],
                                     color=1)
@@ -36,7 +36,7 @@ polygon_blue_value_1 = polygon_blue_value_1[:, :, np.newaxis]
 
 # yellow polygon
 mask_image_temp = np.zeros((1080, 1920), dtype=np.uint8)
-list_pts_yellow = [[0, 1031], [1920, 802], [1920, 740], [0, 970]]
+list_pts_yellow = [[0, 1031], [1920, 802], [1920, 760], [0, 994]]
 ndarray_pts_yellow = np.array(list_pts_yellow, np.int32)
 polygon_yellow_value_2 = cv2.fillPoly(mask_image_temp, [ndarray_pts_yellow],
                                       color=2)
