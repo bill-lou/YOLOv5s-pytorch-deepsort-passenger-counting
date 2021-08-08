@@ -2,11 +2,16 @@
 
 in/*
 !in/.gitkeep
-
 out/*
 !out/.gitkeep
 
 deep_sort_pytorch/deep_sort/deep/checkpoint/*
 !deep_sort_pytorch/deep_sort/deep/checkpoint/.gitkeep
 
+deep_sort_alt/deep_sort/resources/networks/*
+!deep_sort_alt/deep_sort/resources/networks/.gitkeep
+
+__pycache__
+
 *.mp4
+*.pt
