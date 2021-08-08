@@ -8,13 +8,16 @@
 
 pip install -r requirements.txt
 
+# Counting Line + YOLO Standard + Deep Sort Standard
 python3 count.py --deepsort 1
+# Counting Line + YOLO Custom + Deep Sort Custom
+python3 count.py --deepsort 2 
 
 or
 
+# same for track without counting - use 1 or 2 as for count
 python3 track.py --deepsort 2
 
-视频应该提前放到track.py同一路径下面
 
 这里是已经放好了模型，在yolo那个文件夹。
 原项目地址：https://github.com/mikel-brostrom/Yolov5_DeepSort_Pytorch
