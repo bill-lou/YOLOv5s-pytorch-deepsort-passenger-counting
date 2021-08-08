@@ -5,7 +5,7 @@
 matplotlib>=3.2.2
 numpy>=1.18.5
 opencv-python>=4.1.2
-Pillow
+Pillow>=8.1.1
 PyYAML>=5.3.1
 scipy>=1.4.1
 torch>=1.7.0
@@ -20,3 +20,10 @@ pandas
 # deep_sort -----------------------------------
 
 easydict
+
+# deep_sort alternative -----------------------
+
+imgaug>=0.2.8
+future==0.18.2
+nonechucks>=0.4.2
+scikit_learn>=0.23.2
