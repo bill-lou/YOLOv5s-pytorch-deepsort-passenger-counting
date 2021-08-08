@@ -39,6 +39,13 @@ def bbox_rel(*xyxy):
     return x_c, y_c, w, h
 
 
+def bbox_rel2(*xyxy):
+    bbox_w = abs(xyxy[0].item() - xyxy[2].item())
+    bbox_h = abs(xyxy[1].item() - xyxy[3].item())
+
+    return xyxy[0], xyxy[1], bbox_w, bbox_h
+
+
 def compute_color_for_labels(label):
     """
     Simple function that adds fixed color depending on the class
@@ -365,7 +372,7 @@ def detectAlternative(opt):
 
                 # Adapt detections to deep sort input format
                 for *xyxy, conf, cls in det:
-                    x_c, y_c, bbox_w, bbox_h = bbox_rel(*xyxy)
+                    x_c, y_c, bbox_w, bbox_h = bbox_rel2(*xyxy)
                     obj = [x_c, y_c, bbox_w, bbox_h]
                     bbox_xywh.append(obj)
                     confs.append([conf.item()])
