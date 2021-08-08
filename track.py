@@ -49,22 +49,26 @@ def compute_color_for_labels(label):
 
 def draw_boxes(img, bbox, identities=None, offset=(0, 0)):
     for i, box in enumerate(bbox):
-        x1, y1, x2, y2 = [int(i) for i in box]
-        x1 += offset[0]
-        x2 += offset[0]
-        y1 += offset[1]
-        y2 += offset[1]
-        # box text and bar
         id = int(identities[i]) if identities is not None else 0
-        color = compute_color_for_labels(id)
-        label = '{}{:d}'.format("", id)
-        t_size = cv2.getTextSize(label, cv2.FONT_HERSHEY_PLAIN, 2, 2)[0]
-        cv2.rectangle(img, (x1, y1), (x2, y2), color, 3)
-        cv2.rectangle(img, (x1, y1), (x1 + t_size[0] + 3, y1 + t_size[1] + 4),
-                      color, -1)
-        cv2.putText(img, label, (x1, y1 + t_size[1] + 4),
-                    cv2.FONT_HERSHEY_PLAIN, 2, [255, 255, 255], 2)
-    return img
+        draw_box(img, box, id, offset)
+
+
+def draw_box(img, boundary_box, id, offset=(0, 0)):
+    x1, y1, x2, y2 = [int(i) for i in boundary_box]
+    x1 += offset[0]
+    x2 += offset[0]
+    y1 += offset[1]
+    y2 += offset[1]
+
+    color = compute_color_for_labels(id)
+    label = '{}{:d}'.format("", id)
+
+    t_size = cv2.getTextSize(label, cv2.FONT_HERSHEY_PLAIN, 2, 2)[0]
+    cv2.rectangle(img, (x1, y1), (x2, y2), color, 3)
+    cv2.rectangle(img, (x1, y1), (x1 + t_size[0] + 3, y1 + t_size[1] + 4),
+                  color, -1)
+    cv2.putText(img, label, (x1, y1 + t_size[1] + 4), cv2.FONT_HERSHEY_PLAIN,
+                2, [255, 255, 255], 2)
 
 
 def detect(opt, save_img=False):
@@ -155,7 +159,16 @@ def detect(opt, save_img=False):
                 p, s, im0 = path, '', im0s
 
             s += '%gx%g ' % img.shape[2:]  # print string
-            save_path = str(Path(out) / Path(p).name)
+
+            filename = Path(p).name
+            save_path = str(Path(out) / filename)
+
+            fileSp = os.path.splitext(filename)
+
+            if len(fileSp) >= 2:
+                basename = fileSp[0]
+                extension = fileSp[1]
+                save_path = str(Path(out) / Path(basename + "_v1" + extension))
 
             if det is not None and len(det):
                 # Rescale boxes from img_size to im0 size
@@ -256,7 +269,7 @@ def detectAlternative(opt):
     cfg = get_config()
     cfg.merge_from_file(opt.config_deepsort)
 
-    deepsort = deepsort_rbc('ckpts/model80.pt')
+    deepsort = deepsort_rbc(opt.deepsort_wheight)
 
     # Initialize
 
@@ -326,7 +339,16 @@ def detectAlternative(opt):
                 p, s, im0 = path, '', im0s
 
             s += '%gx%g ' % img.shape[2:]  # print string
-            save_path = str(Path(out) / Path(p).name)
+
+            filename = Path(p).name
+            save_path = str(Path(out) / filename)
+
+            fileSp = os.path.splitext(filename)
+
+            if len(fileSp) >= 2:
+                basename = fileSp[0]
+                extension = fileSp[1]
+                save_path = str(Path(out) / Path(basename + "_v2" + extension))
 
             if det is not None and len(det):
                 # Rescale boxes from img_size to im0 size
@@ -356,8 +378,6 @@ def detectAlternative(opt):
                 # im0 <class 'numpy.ndarray'>
 
                 # Pass detections to deepsort
-
-                # outputs = deepsort.update(xywhs, confss, im0)
                 tracker, detections_class = deepsort.run_deep_sort(
                     im0, confss, xywhs)
 
@@ -368,44 +388,22 @@ def detectAlternative(opt):
                     #Get the corrected/predicted bounding box
                     bbox = track.to_tlbr()
 
-                    #Get the ID for the particular track.
-                    id_num = str(track.track_id)
-
                     # features = track.features  #Get the feature vector corresponding to the detection.
 
-                    #Draw bbox from tracker.
-                    cv2.rectangle(im0, (int(bbox[0]), int(bbox[1])),
-                                  (int(bbox[2]), int(bbox[3])),
-                                  (255, 255, 255), 2)
-                    cv2.putText(im0, str(id_num), (int(bbox[0]), int(bbox[1])),
-                                0, 5e-3 * 200, (0, 255, 0), 2)
+                    draw_box(im0, bbox, track.track_id)
 
-                    #Draw bbox from detector. Just to compare.
-                    for det in detections_class:
-                        bbox = det.to_tlbr()
-                        cv2.rectangle(im0, (int(bbox[0]), int(bbox[1])),
-                                      (int(bbox[2]), int(bbox[3])),
-                                      (255, 255, 0), 2)
-
-                # # draw boxes for visualization
-                # if len(outputs) > 0:
-                #     bbox_xyxy = outputs[:, :4]
-                #     identities = outputs[:, -1]
-                #     draw_boxes(im0, bbox_xyxy, identities)
-
-                # # Write MOT compliant results to file
-                # if save_txt and len(outputs) != 0:
-                #     for j, output in enumerate(outputs):
-                #         bbox_left = output[0]
-                #         bbox_top = output[1]
-                #         bbox_w = output[2]
-                #         bbox_h = output[3]
-                #         identity = output[-1]
-                #         with open(txt_path, 'a') as f:
-                #             f.write(('%g ' * 10 + '\n') %
-                #                     (frame_idx, identity, bbox_left, bbox_top,
-                #                      bbox_w, bbox_h, -1, -1, -1,
-                #                      -1))  # label format
+                    # Write MOT compliant results to file
+                    if save_txt:
+                        bbox_left = bbox[0]
+                        bbox_top = bbox[1]
+                        bbox_w = bbox[2]
+                        bbox_h = bbox[3]
+                        identity = track.track_id
+                        with open(txt_path, 'a') as f:
+                            f.write(('%g ' * 10 + '\n') %
+                                    (frame_idx, identity, bbox_left, bbox_top,
+                                     bbox_w, bbox_h, -1, -1, -1,
+                                     -1))  # label format
 
             # Print time (inference + NMS)
             print('%sDone. (%.3fs)' % (s, t2 - t1))
@@ -415,6 +413,27 @@ def detectAlternative(opt):
                 cv2.imshow(p, im0)
                 if cv2.waitKey(1) == ord('q'):  # q to quit
                     raise StopIteration
+
+            # Save results (image with detections)
+            if save_img:
+                if dataset.mode == 'images':
+                    cv2.imwrite(save_path, im0)
+                else:
+                    if vid_path != save_path:  # new video
+                        vid_path = save_path
+
+                        # release previous video writer
+                        if isinstance(vid_writer, cv2.VideoWriter):
+                            vid_writer.release()
+
+                        fps = vid_cap.get(cv2.CAP_PROP_FPS)
+                        w = int(vid_cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+                        h = int(vid_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+                        vid_writer = cv2.VideoWriter(
+                            save_path, cv2.VideoWriter_fourcc(*opt.fourcc),
+                            fps, (w, h))
+
+                    vid_writer.write(im0)
 
 
 if __name__ == '__main__':
@@ -469,13 +488,23 @@ if __name__ == '__main__':
     parser.add_argument("--config_deepsort",
                         type=str,
                         default="deep_sort_pytorch/configs/deep_sort.yaml")
+    parser.add_argument("--deepsort_wheight",
+                        type=str,
+                        default="ckpts/model80.pt")
+    parser.add_argument('--deepsort',
+                        type=int,
+                        default=1,
+                        help='which deepsort version 1 or 2')
+
     args = parser.parse_args()
     args.img_size = check_img_size(args.img_size)
-    print(args)
 
     with torch.no_grad():
-        # version 1
-        # detect(args)
-
-        # version 2
-        detectAlternative(args)
+        if args.deepsort == 1:
+            print("detect with deepsort v1")
+            detect(args)
+        elif args.deepsort == 2:
+            print("detect with deepsort v2")
+            detectAlternative(args)
+        else:
+            print("deepsort version not found")
