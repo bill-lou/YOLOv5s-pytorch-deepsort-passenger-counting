@@ -6,9 +6,13 @@
 
 在cmd/终端里切到文件下载到的目录，输入
 
-pip install -U -r requirements.txt
+pip install -r requirements.txt
 
-python3 track.py --source 视频文件的名字（比如1.mp4）
+python3 track.py --source 视频文件的名字（比如1.mp4）--deepsort 1
+
+or
+
+python3 track.py --deepsort 2
 
 视频应该提前放到track.py同一路径下面
 
