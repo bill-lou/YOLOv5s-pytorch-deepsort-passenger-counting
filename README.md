@@ -8,7 +8,7 @@
 
 pip install -r requirements.txt
 
-python3 track.py --source 视频文件的名字（比如1.mp4）--deepsort 1
+python3 count.py --deepsort 1
 
 or
 
