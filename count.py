@@ -543,6 +543,8 @@ def detectAlternative(opt):
                 tracker, detections_class = deepsort.run_deep_sort(
                     im0, confss, xywhs)
 
+                id_list = list()
+
                 for track in tracker.tracks:
                     if not track.is_confirmed() or track.time_since_update > 1:
                         continue
@@ -553,6 +555,19 @@ def detectAlternative(opt):
                     # features = track.features  #Get the feature vector corresponding to the detection.
 
                     draw_box(im0, bbox, track.track_id)
+
+                    up, down = check_if_rect_overlaps_line(
+                        bbox, track.track_id)
+
+                    id_list.append(track.track_id)
+
+                    if up:
+                        global up_count
+                        up_count += 1
+
+                    if down:
+                        global down_count
+                        down_count += 1
 
                     # Write MOT compliant results to file
                     if save_txt:
@@ -567,8 +582,28 @@ def detectAlternative(opt):
                                      bbox_w, bbox_h, -1, -1, -1,
                                      -1))  # label format
 
+                if len(id_list) > 0:
+                    cleanup_tracking_lists(id_list)
+                else:
+                    list_overlapping_blue_polygon.clear()
+                    list_overlapping_yellow_polygon.clear()
+
             # Print time (inference + NMS)
             print('%sDone. (%.3fs)' % (s, t2 - t1))
+
+            # resize polygon image 1080 -> ?
+            width = im0.shape[1]
+            height = im0.shape[0]
+
+            global color_polygons_image
+            color_polygons_image = cv2.resize(color_polygons_image,
+                                              (width, height))
+            global polygon_mask_blue_and_yellow
+            polygon_mask_blue_and_yellow = cv2.resize(
+                polygon_mask_blue_and_yellow, (width, height))
+
+            im0 = draw_up_down_text(im0, up_count, down_count)
+            im0 = add_polygons_image(im0)
 
             # Stream results
             if view_img:
@@ -596,6 +631,13 @@ def detectAlternative(opt):
                             fps, (w, h))
 
                     vid_writer.write(im0)
+
+    if save_txt or save_img:
+        print('Results saved to %s' % os.getcwd() + os.sep + out)
+        if platform == 'darwin':  # MacOS
+            os.system('open ' + save_path)
+
+    print('Done. (%.3fs)' % (time.time() - t0))
 
 
 if __name__ == '__main__':
