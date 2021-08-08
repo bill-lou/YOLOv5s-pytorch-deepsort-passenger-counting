@@ -1,1 +1,9 @@
 .vscode/
+
+in/*
+!in/.gitkeep
+
+out/*
+!out/.gitkeep
+
+*.mp4
