@@ -6,4 +6,7 @@ in/*
 out/*
 !out/.gitkeep
 
+deep_sort_pytorch/deep_sort/deep/checkpoint/*
+!deep_sort_pytorch/deep_sort/deep/checkpoint/.gitkeep
+
 *.mp4
