@@ -77,26 +77,30 @@ def check_if_rect_overlaps_line(boundary_box, track_id):
     if polygon_mask_blue_and_yellow[y, x] == 1:
         if track_id not in list_overlapping_blue_polygon:
             list_overlapping_blue_polygon.append(track_id)
-        pass
+            pass
 
         if track_id in list_overlapping_yellow_polygon:
+            list_overlapping_yellow_polygon.remove(track_id)
+
             # up_count += 1
             return True, False
-
-            list_overlapping_yellow_polygon.remove(track_id)
         else:
             pass
 
     elif polygon_mask_blue_and_yellow[y, x] == 2:
         if track_id not in list_overlapping_yellow_polygon:
             list_overlapping_yellow_polygon.append(track_id)
-        pass
+            pass
 
         if track_id in list_overlapping_blue_polygon:
+            list_overlapping_blue_polygon.remove(track_id)
+
             # down_count += 1
             return False, True
+        else:
+            pass
 
-            list_overlapping_blue_polygon.remove(track_id)
+    else:
         pass
 
     return False, False
