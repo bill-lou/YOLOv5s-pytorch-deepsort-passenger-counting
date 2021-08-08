@@ -198,7 +198,6 @@ def detect(opt, save_img=False):
 
             # Save results (image with detections)
             if save_img:
-                print('saving img!')
                 if dataset.mode == 'images':
                     cv2.imwrite(save_path, im0)
                 else:
@@ -226,11 +225,11 @@ def detect(opt, save_img=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str,
-                        default='yolov5/weights/yolov5s.pt', help='model.pt path')
+                        default='yolov5/weights/custom_train_best.pt', help='model.pt path')
     # file/folder, 0 for webcam
     parser.add_argument('--source', type=str,
                         default='inference/images', help='source')
-    parser.add_argument('--output', type=str, default='inference/output',
+    parser.add_argument('--output', type=str, default='out',
                         help='output folder')  # output folder
     parser.add_argument('--img-size', type=int, default=640,
                         help='inference size (pixels)')
