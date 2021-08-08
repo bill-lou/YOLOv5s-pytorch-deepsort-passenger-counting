@@ -145,7 +145,7 @@ def draw_up_down_text(frame, up_count, down_count):
                         org=draw_text_postion,
                         fontFace=font_draw_number,
                         fontScale=1,
-                        color=(177, 12, 187),
+                        color=(45, 167, 45),
                         thickness=2)
 
     return frame
