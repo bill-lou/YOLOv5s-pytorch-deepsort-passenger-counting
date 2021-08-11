@@ -28,7 +28,7 @@ The following repos were adapted and reused for this purpose:
 
 First, clone the repository: 
 ```
-git@github.com:bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting.git
+git clone git@github.com:bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting.git
 ```
 
 Use this command to install all the necessary packages. Note that we are using `python3`
