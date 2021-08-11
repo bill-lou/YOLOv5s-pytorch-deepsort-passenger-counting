@@ -45,7 +45,7 @@ There are two wheights available for YOLOv5, make sure to adjust the parser argu
 
 [Custom Head](https://drive.google.com/drive/folders/1NY_uZuHOqogKOk49UVEyyXlODtRBGy4z?usp=sharing)
 
-**custom_train_best.pt** for standard YOLO Detection
+**yolov5x.pt** for standard YOLO Detection
 ```python
 parser.add_argument('--weights',
                     type=str,
