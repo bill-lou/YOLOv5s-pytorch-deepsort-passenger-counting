@@ -6,7 +6,7 @@ This project was developed by both Swiss and Chinese students as part of a joint
 
 | Standard      | Custom        | 
 | ------------- |:-------------:| 
-| <img src="https://github.com/bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting/blob/main/sample/standard.png" width="450" height="307">     | <img src="https://github.com/bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting/blob/main/sample/custom.png" width="440" height="307"> | 
+| <img src="https://github.com/bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting/blob/main/sample/standard.png" width="500" height="341">     | <img src="https://github.com/bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting/blob/main/sample/custom.png" width="500" height="341"> | 
 
 The main task includes to count passenger flows in a metro station. Therefore YOLOv5 and Deep Sort as well as a counting mechanism were merged (from already existing Repos). In addition, new weights of both YOLO and the feature extractor of Deep Sort were trained using custom datasets.
 
