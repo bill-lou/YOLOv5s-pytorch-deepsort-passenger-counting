@@ -8,7 +8,7 @@ This project was developed by both Swiss and Chinese students as part of a joint
 | ------------- |:-------------:| 
 | <img src="https://github.com/bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting/blob/main/sample/standard.png" width="400" height="273">     | <img src="https://github.com/bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting/blob/main/sample/custom.png" width="400" height="273"> | 
 
-The main task includes to count passenger flows in a metro station. Therefore YOLOv5 and Deep Sort as well as a counting mechanism were merged (from already existing Repos. In addition, new weights of both YOLO and the feature extractor of Deep Sort were trained using custom datasets.
+The main task includes to count passenger flows in a metro station. Therefore YOLOv5 and Deep Sort as well as a counting mechanism were merged (from already existing Repos). In addition, new weights of both YOLO and the feature extractor of Deep Sort were trained using custom datasets.
 
 The following repos were adapted and reused for this purpose:
 
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 # Configuration
 There are two wheights available for YOLOv5, make sure to adjust the parser argument in `count.py` befor running the code 
 
-**You can Downlaod the Checkpoints from:**
+**You can Download the Checkpoints from:**
 
 [Standard YOLO](https://github.com/ultralytics/yolov5/releases)
 
@@ -63,7 +63,7 @@ parser.add_argument('--weights',
 
 Download as well the Deep Sort Checkpoints  and add it to the folder `deep_sort_pytorch\deep_sort\deep\checkpoint`
 
-**You can Downlaod the Checkpoints from:**
+**You can Download the Checkpoints from:**
 
 [Standard Deep Sort](https://drive.google.com/drive/folders/18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp)
 
