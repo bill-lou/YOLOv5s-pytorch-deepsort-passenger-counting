@@ -1,5 +1,5 @@
 # YOLOv5 + Deep Sort Passanger Counter by Heads 
-A computer vision and deep learning project for counting passengers using head recognition.
+A computer vision and deep learning project for counting and tracking passengers using head recognition.
 
 This project was developed by both Swiss and Chinese students as part of a joint venture between University of Applied Science Northwestern Switzerland FHNW and Shenzhen Technology University SZTU.
 
@@ -63,7 +63,7 @@ parser.add_argument('--weights',
 
 Download as well the Deep Sort Checkpoints  and add it to the folder `deep_sort_pytorch\deep_sort\deep\checkpoint`
 
-**You can Download the Checkpoints from:**
+**You can Download the Weights from:**
 
 [Standard Deep Sort](https://drive.google.com/drive/folders/18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp)
 
