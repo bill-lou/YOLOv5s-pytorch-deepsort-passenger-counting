@@ -1,7 +1,7 @@
 # YOLOv5 + Deep Sort Passanger Counter by Heads 
 A computer vision and deep learning project for counting passengers using head recognition.
 
-This project was developed by both Swiss and Chinese students as part of a joint venture between University of Applied Science FHNW and Shenzhen Technology University SZTU.
+This project was developed by both Swiss and Chinese students as part of a joint venture between University of Applied Science Northwestern Switzerland FHNW and Shenzhen Technology University SZTU.
 
 
 | Standard      | Custom        | 
