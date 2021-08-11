@@ -78,7 +78,7 @@ Add your input Stream (Video File) into the **in** folder
 Once the code is successfully completed - you should find a video of your input + stream + the augmentend information of tracker, detector and counting in the **out** folder
 
 # Run the Code with a Counter
-** Counting Line + YOLO + Deep Sort Standard**
+**Counting Line + YOLO + Deep Sort Standard**
 ```
 python3 count.py --deepsort 1
 ```
