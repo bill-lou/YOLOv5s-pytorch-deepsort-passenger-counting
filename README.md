@@ -91,7 +91,7 @@ python3 count.py --deepsort 2
 ```
 python3 track.py --deepsort 1
 ```
-**YOLO + Deep Sort Standard**
+**YOLO + Deep Sort Custom**
 ```
 python3 track.py --deepsort 2
 ```
