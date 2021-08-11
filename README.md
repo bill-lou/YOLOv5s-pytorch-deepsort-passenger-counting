@@ -3,10 +3,10 @@ A computer vision and deep learning project for counting passengers using head r
 
 This project was developed by both Swiss and Chinese students as part of a joint venture between University of Applied Science FHNW and Shenzhen Technology University SZTU.
 
-**Standard Implementation**
 
-
-**Custom Implementation**
+| Standard      | Custom        | 
+| ------------- |:-------------:| 
+| <img src="https://github.com/bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting/blob/main/sample/standard.png" width="400" height="273">     | <img src="https://github.com/bill-lou/YOLOv5s-pytorch-deepsort-passenger-counting/blob/main/sample/custom.png" width="400" height="273"> | 
 
 The main task includes to count passenger flows in a metro station. Therefore YOLOv5 and Deep Sort as well as a counting mechanism were merged (from already existing Repos. In addition, new weights of both YOLO and the feature extractor of Deep Sort were trained using custom datasets.
 
