@@ -648,7 +648,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights',
                         type=str,
-                        default='yolov5/weights/custom_train_best.pt',
+                        default='yolov5/weights/yolov5x.pt',
                         help='model.pt path')
     # file/folder, 0 for webcam
     parser.add_argument('--source', type=str, default='in', help='source')
