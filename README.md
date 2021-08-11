@@ -39,7 +39,7 @@ pip install -r requirements.txt
 # Configuration
 There are two wheights available for YOLOv5, make sure to adjust the parser argument in `count.py` befor running the code 
 
-**You can Download the Checkpoints from:**
+**You can Download the Weights from:**
 
 [Standard YOLO](https://github.com/ultralytics/yolov5/releases)
 
@@ -63,7 +63,7 @@ parser.add_argument('--weights',
 
 Download as well the Deep Sort Checkpoints  and add it to the folder `deep_sort_pytorch\deep_sort\deep\checkpoint`
 
-**You can Download the Weights from:**
+**You can Download the Checkpoints from:**
 
 [Standard Deep Sort](https://drive.google.com/drive/folders/18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp)
 
